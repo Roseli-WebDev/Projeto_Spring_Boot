@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${nomePag}"></title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Fast Food Delícia</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/index}">Home</a></li>
+                <li><a th:href="@{/produtos/listar}">Produtos</a></li>
+                <li><a th:href="@{/pedidos}">Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="form-pedido" class="form-section">
+        <h2 th:text="${nomePag}"></h2>
+
+        <form th:action="${link}" th:object="${pedido}" method="post" class="form-cadastro">
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="cliente">Cliente:</label>
+            <input type="text" id="cliente" th:field="*{cliente}" placeholder="Nome do Cliente" required
+                class="form-input">
+
+            <label for="status">Status:</label>
+            <select id="status" th:field="*{status}" class="form-input">
+                <option value="Pendente">Pendente</option>
+                <option value="Em Preparo">Em Preparo</option>
+                <option value="Aguardando Entrega">Aguardando Entrega</option>
+                <option value="Entregue">Entregue</option>
+                <option value="Cancelado">Cancelado</option>
+            </select>
+
+            <label for="produtos">Produtos:</label>
+            <div class="checkbox-group">
+                <div th:each="produto : ${produtosDisponiveis}">
+                    <input type="checkbox" th:id="${'produto_' + produto.id}" th:name="produtosIds"
+                        th:value="${produto.id}" class="produto-checkbox" th:data-nome="${produto.nome}"
+                        th:data-preco="${produto.preco}" />
+                    <label th:for="${'produto_' + produto.id}"
+                        th:text="${produto.nome + ' - R$ ' + #numbers.formatDecimal(produto.preco, 1, 'POINT', 2, 'COMMA')}"></label>
+                </div>
+            </div>
+            <hr />
+            <h3>Resumo do Pedido:</h3>
+            <table id="tabela-produtos-selecionados" class="tabela-resumo">
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><strong>Total do Pedido:</strong></td>
+                        <td id="total-pedido">R$ 0,00</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <hr />
+
+            <button type="submit" th:text="${valorBtn}"></button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Fast Food Delícia - Todos os direitos reservados</p>
+    </footer>
+
+    <script th:src="@{/pedidoForm.js}"></script>
+</body>
+
+</html>

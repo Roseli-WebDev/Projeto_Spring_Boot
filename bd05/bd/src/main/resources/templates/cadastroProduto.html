@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${nomePag}"></title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Fast Food Delícia</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/produtos/listar}">Produtos</a></li>
+                <li><a th:href="@{/pedidos}">Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="form-section">
+        <h1 th:text="${nomePag}"></h1>
+
+        <form th:action="${link}" th:object="${produto}" method="post" class="form-cadastro">
+            <input type="hidden" th:field="*{id}" />
+
+            <div>
+                <label for="nome" class="form-label">Nome:</label>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="Nome do Produto" required
+                    class="form-input" />
+            </div>
+
+            <div>
+                <label for="preco" class="form-label">Preço:</label>
+                <input type="number" id="preco" th:field="*{preco}" step="0.01" placeholder="0.00" required
+                    class="form-input" />
+            </div>
+
+            <div class="button-group">
+                <button type="submit" th:text="${valorBtn}" class="btn-submit"></button>
+                <a th:href="@{/produtos/listar}" class="btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Fast Food Delícia - Todos os direitos reservados</p>
+    </footer>
+
+    <script th:src="@{/script.js}"></script>
+</body>
+
+</html>

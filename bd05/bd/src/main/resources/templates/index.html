@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Fast Food Delícia</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Ícones -->
+</head>
+
+<body>
+    <header>
+        <h1>Fast Food Delícia</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">Home</a></li>
+                <li><a th:href="@{/produtos/listar}">Produtos</a></li>
+                <li><a th:href="@{/pedidos}">Pedidos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="inicio">
+        <img class="banner-img" src="img/banner.jpg" alt="Banner Fast Food Delícia">
+        <div class="banner-content">
+            <h2>O melhor sabor em cada mordida!</h2>
+            <p>Entrega rápida e sabor irresistível</p>
+            <button id="orderButton" onclick="window.location.href='/produtos/listar'">Peça já</button>
+        </div>
+    </section>
+
+    <section id="produtos">
+        <h2>Nosso Cardápio</h2>
+        <div class="menu">
+            <div class="product-card">
+                <img src="img/hamburguer.ico" alt="Hamburguer">
+                <p>Hambúrguer - R$ 29,90</p>
+            </div>
+            <div class="product-card">
+                <img src="img/batata-frita.ico" alt="Batata Frita">
+                <p>Batata - R$ 15,00</p>
+            </div>
+            <div class="product-card">
+                <img src="img/refrigerante.ico" alt="Refrigerante">
+                <p>Refrigerante - R$ 9,00</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="adicionar">
+        <h2>Adicionar Novo Produto</h2>
+        <form id="addProductForm" th:action="@{/produtos/salvar}" method="post">
+            <input type="text" name="nome" placeholder="Nome do Produto" required>
+            <input type="number" name="preco" placeholder="Preço" step="0.01" required>
+            <button type="submit">Adicionar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Fast Food Delícia - Todos os direitos reservados</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
