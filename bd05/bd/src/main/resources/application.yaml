@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/crud_asilo
-    username: postgres
+    url: ${DB_URL}             
+    username: ${DB_USERNAME}   
     password: ${Senha_Secreta}
     driver-class-name: org.postgresql.Driver
 
